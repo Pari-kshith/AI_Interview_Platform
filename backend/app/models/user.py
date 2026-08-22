@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
-
+from sqlalchemy.orm import relationship
 from app.database.base import Base
 
 
@@ -16,3 +16,5 @@ class User(Base):
     password_hash = Column(String(255), nullable=False)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    interviews=relationship("Interview", back_populates="user")
