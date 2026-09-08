@@ -6,26 +6,17 @@ from app.database.init_db import init_db
 
 from app.api.auth import router as auth_router
 from app.api.interview import router as interview_router
-
+from app.api.question import app as question_router
 
 app = FastAPI(
     title="AI Interview Platform"
 )
 
 
-# ------------------------------------------------
-# DATABASE STARTUP
-# ------------------------------------------------
-
 @app.on_event("startup")
 def startup():
 
     init_db()
-
-
-# ------------------------------------------------
-# HOME
-# ------------------------------------------------
 
 @app.get("/")
 def home():
@@ -34,10 +25,6 @@ def home():
         "message": "AI Interview Platform Backend Running"
     }
 
-
-# ------------------------------------------------
-# HEALTH CHECK
-# ------------------------------------------------
 
 @app.get("/health")
 def health_check():
@@ -62,15 +49,7 @@ def health_check():
         }
 
 
-# ------------------------------------------------
-# AUTH ROUTES
-# ------------------------------------------------
-
 app.include_router(auth_router)
 
-
-# ------------------------------------------------
-# INTERVIEW ROUTES
-# ------------------------------------------------
-
 app.include_router(interview_router)
+app.include_router(question_router)
