@@ -7,7 +7,7 @@ from app.database.init_db import init_db
 from app.api.auth import router as auth_router
 from app.api.interview import router as interview_router
 from app.api.question import app as question_router
-
+from app.api.answer import router as answer_router
 app = FastAPI(
     title="AI Interview Platform"
 )
@@ -53,3 +53,4 @@ app.include_router(auth_router)
 
 app.include_router(interview_router)
 app.include_router(question_router)
+app.include_router(answer_router)

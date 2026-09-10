@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text
-
+from sqlalchemy.orm import relationship
 from app.database.base import Base
 
 
@@ -13,3 +13,9 @@ class Question(Base):
     difficulty = Column(String(50), nullable=False)
 
     question_text = Column(Text, nullable=False)
+
+    answers = relationship(
+        "Answer",
+        back_populates="question",
+        cascade="all, delete-orphan"
+    )
